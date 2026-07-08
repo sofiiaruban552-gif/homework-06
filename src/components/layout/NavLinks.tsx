@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CatalogPage = () => {
+const NavLinks = () => {
  return (
   <div>
    
@@ -8,4 +8,4 @@ const CatalogPage = () => {
  );
 }
 
-export default CatalogPage;
+export default NavLinks;

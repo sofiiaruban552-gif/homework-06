@@ -1,7 +1,19 @@
-import React from "react";
+import type { ReactNode } from "react";
+import Header from "./Header";
+import Footer from "./Footer";
 
-const Layout = () => {
-  return <div></div>;
+interface LayoutProps {
+  children: ReactNode;
+}
+
+const Layout = ({ children }: LayoutProps) => {
+  return (
+    <div className="wrapper">
+      <Header />
+      {children}
+      <Footer />
+    </div>
+  );
 };
 
 export default Layout;
