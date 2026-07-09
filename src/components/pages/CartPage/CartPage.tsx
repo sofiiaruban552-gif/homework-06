@@ -1,5 +1,7 @@
 import { useShallow } from "zustand/shallow";
 import type { ReactElement } from "react";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "@/types/routes";
 
 import useCartStore from "@/store/useCartStore";
 
@@ -7,6 +9,7 @@ import Button from "@/components/shared/Button";
 import CartItem from "./CartItem";
 
 const CartPage = (): ReactElement => {
+  const navigate = useNavigate();
   const { items, clearCart } = useCartStore(
     useShallow((state) => ({
       items: state.items,
@@ -22,6 +25,7 @@ const CartPage = (): ReactElement => {
 
   const handleClearCart = () => {
     clearCart();
+    navigate(ROUTES.HOME);
   };
 
   return (

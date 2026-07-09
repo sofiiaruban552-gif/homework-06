@@ -1,11 +1,11 @@
-import React from 'react';
+import { HeartPulse } from "lucide-react";
 
 const Footer = () => {
- return (
-  <div>
-    Footer
-  </div>
- );
-}
+  return (
+    <div>
+      Made with love <HeartPulse />
+    </div>
+  );
+};
 
 export default Footer;

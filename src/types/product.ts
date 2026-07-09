@@ -11,3 +11,10 @@ export interface Product {
 export interface CartItem extends Product {
   qty: number;
 }
+
+export interface ProductsResponse {
+  products: Product[];
+  total: number;
+  skip: number;
+  limit: number;
+}
