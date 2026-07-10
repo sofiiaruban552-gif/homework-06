@@ -8,6 +8,7 @@ import CatalogPage from "./components/pages/CatalogPage/CatalogPage";
 import ProductPage from "./components/pages/ProductPage/ProductPage";
 import CartPage from "./components/pages/CartPage/CartPage";
 import NotFoundPage from "./components/pages/NotFoundPage";
+import CheckoutPage from "./components/pages/CheckoutPage/CheckoutPage";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route path={ROUTES.HOME} element={<CatalogPage />} />
         <Route path={ROUTES.PRODUCT} element={<ProductPage />} />
         <Route path={ROUTES.CART} element={<CartPage />} />
+        <Route path={ROUTES.CHECKOUT} element={<CheckoutPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Layout>

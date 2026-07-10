@@ -1,4 +1,5 @@
 import { Star, ShoppingCart } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useShallow } from "zustand/shallow";
 
 import useCartStore from "@/store/useCartStore";
@@ -6,6 +7,7 @@ import useCartStore from "@/store/useCartStore";
 import Button from "@/components/shared/Button";
 
 import type { Product } from "@/types/product";
+import { ROUTES } from "@/types/routes";
 
 interface ProductCardProps {
   product: Product;
@@ -13,6 +15,7 @@ interface ProductCardProps {
 
 const ProductCard = ({ product }: ProductCardProps) => {
   const { title, price, rating, thumbnail, id } = product;
+
 
   const { items, addToCart } = useCartStore(
     useShallow((state) => ({
@@ -27,37 +30,42 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
   const buttonText = isInCart ? `In cart (${quantityInCart})` : "Add to cart";
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
     addToCart(product);
   };
 
+
   return (
-    <article className="product-card">
-      <div className="product-card__image-wrapper">
-        <img className="product-card__image" src={thumbnail} alt={title} />
-      </div>
-
-      <div className="product-card__content">
-        <h3 className="product-card__title">{title}</h3>
-
-        <div className="product-card__rating">
-          <Star size={16} className="product-card__star" />
-          <span>{rating}</span>
+    <Link to={ROUTES.product(id)} className="product-card">
+      <article>
+        <div className="product-card__image-wrapper">
+          <img className="product-card__image" src={thumbnail} alt={title} />
         </div>
 
-        <div className="product-card__footer">
-          <span className="product-card__price">${price}</span>
+        <div className="product-card__content">
+          <h3 className="product-card__title">{title}</h3>
 
-          <Button
-            icon={ShoppingCart}
-            onClick={handleAddToCart}
-            className={isInCart ? "product-card__btn--active" : ""}
-          >
-            {buttonText}
-          </Button>
+          <div className="product-card__rating">
+            <Star size={16} className="product-card__star" />
+            <span>{rating}</span>
+          </div>
+
+          <div className="product-card__footer">
+            <span className="product-card__price">$ {price}</span>
+
+            <Button
+              icon={ShoppingCart}
+              onClick={handleAddToCart}
+              className={isInCart ? "product-card__btn--active" : ""}
+            >
+              {buttonText}
+            </Button>
+          </div>
         </div>
-      </div>
-    </article>
+      </article>
+    </Link>
   );
 };
 

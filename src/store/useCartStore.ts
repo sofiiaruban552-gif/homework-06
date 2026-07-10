@@ -3,14 +3,18 @@ import type { Product, CartItem } from "../types/product";
 
 interface CartState {
   items: CartItem[];
+  getTotalPrice: () => number;
   addToCart: (product: Product) => void;
   incrementQty: (id: number) => void;
   decrementQty: (id: number) => void;
   removeFromCart: (id: number) => void;
   clearCart: () => void;
 }
-const useCartStore = create<CartState>((set) => ({
+const useCartStore = create<CartState>((set, get) => ({
   items: [],
+
+  getTotalPrice: () =>
+    get().items.reduce((sum, item) => sum + item.price * item.qty, 0),
 
   addToCart: (product) =>
     set((state) => {

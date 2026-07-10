@@ -1,11 +1,9 @@
-import type { ReactNode } from "react";
+import type { ButtonHTMLAttributes, ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
 
-interface ButtonProps {
-  onClick?: () => void;
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: LucideIcon;
   children?: ReactNode;
-  className?: string;
 }
 
 const Button = ({

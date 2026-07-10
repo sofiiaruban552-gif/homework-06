@@ -1,6 +1,6 @@
 import { useShallow } from "zustand/shallow";
 import type { ReactElement } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { ROUTES } from "@/types/routes";
 
 import useCartStore from "@/store/useCartStore";
@@ -10,18 +10,15 @@ import CartItem from "./CartItem";
 
 const CartPage = (): ReactElement => {
   const navigate = useNavigate();
-  const { items, clearCart } = useCartStore(
+  const { items, totalPrice, clearCart } = useCartStore(
     useShallow((state) => ({
       items: state.items,
+      totalPrice: state.getTotalPrice(),
       clearCart: state.clearCart,
     })),
   );
 
   const isEmpty = items.length === 0;
-
-  const totalPrice = items
-    .reduce((total, item) => total + item.price * item.qty, 0)
-    .toFixed(2);
 
   const handleClearCart = () => {
     clearCart();
@@ -43,11 +40,16 @@ const CartPage = (): ReactElement => {
           </div>
 
           <div className="cart__footer">
-            <span className="cart__total">Total: ${totalPrice}</span>
+            <span className="cart__total">Total: ${totalPrice.toFixed(2)}</span>
 
-            <Button className="cart__clear-btn" onClick={handleClearCart}>
-              Clear Cart
-            </Button>
+            <div className="cart__actions">
+              <Button className="cart__clear-btn" onClick={handleClearCart}>
+                Clear Cart
+              </Button>
+              <Link to={ROUTES.CHECKOUT}>
+                <Button className="cart__checkout-btn">Checkout</Button>
+              </Link>
+            </div>
           </div>
         </>
       )}

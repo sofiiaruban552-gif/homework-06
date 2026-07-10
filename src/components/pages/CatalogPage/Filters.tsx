@@ -1,5 +1,5 @@
 import { Search, Tags } from "lucide-react";
-
+import Input from "@/components/shared/Input";
 import type { ChangeEvent } from "react";
 
 interface FiltersProps {
@@ -17,8 +17,8 @@ const Filters = ({
   selectedCategory = "",
   onCategoryChange,
 }: FiltersProps) => {
-  const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
-    onSearchChange(event.target.value);
+  const handleSearchChange = (value: string) => {
+    onSearchChange(value);
   };
 
   const handleCategoryChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -27,17 +27,14 @@ const Filters = ({
 
   return (
     <section className="filters">
-      <div className="filters__search-wrapper">
-        <Search size={20} className="filters__icon" />
-
-        <input
-          className="filters__search"
-          type="text"
-          placeholder="Search products..."
-          value={search}
-          onChange={handleSearchChange}
-        />
-      </div>
+      <Input
+        icon={Search}
+        value={search}
+        onChange={handleSearchChange}
+        placeholder="Search products..."
+        className="filters__search-wrapper"
+        inputClassName="filters__search"
+      />
 
       <div className="filters__select-wrapper">
         <Tags size={20} className="filters__icon" />
