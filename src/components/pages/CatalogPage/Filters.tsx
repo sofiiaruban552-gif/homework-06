@@ -1,6 +1,7 @@
 import { Search, Tags } from "lucide-react";
-import Input from "@/components/shared/Input";
 import type { ChangeEvent } from "react";
+
+import Input from "@/components/shared/Input";
 
 interface FiltersProps {
   search?: string;
@@ -17,8 +18,8 @@ const Filters = ({
   selectedCategory = "",
   onCategoryChange,
 }: FiltersProps) => {
-  const handleSearchChange = (value: string) => {
-    onSearchChange(value);
+  const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
+    onSearchChange(event.target.value);
   };
 
   const handleCategoryChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -33,7 +34,6 @@ const Filters = ({
         onChange={handleSearchChange}
         placeholder="Search products..."
         className="filters__search-wrapper"
-        inputClassName="filters__search"
       />
 
       <div className="filters__select-wrapper">

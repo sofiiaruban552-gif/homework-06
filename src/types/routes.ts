@@ -3,6 +3,7 @@ export const ROUTES = {
   CART: "/cart",
   PRODUCT: "/product/:id",
   CHECKOUT: "/checkout",
+  SUCCESS: "/success",
 
   product: (id: number | string) => `/product/${id}`,
 } as const;

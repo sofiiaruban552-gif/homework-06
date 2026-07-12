@@ -9,6 +9,7 @@ import ProductPage from "./components/pages/ProductPage/ProductPage";
 import CartPage from "./components/pages/CartPage/CartPage";
 import NotFoundPage from "./components/pages/NotFoundPage";
 import CheckoutPage from "./components/pages/CheckoutPage/CheckoutPage";
+import SuccessPage from "./components/pages/SuccessPage";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path={ROUTES.PRODUCT} element={<ProductPage />} />
         <Route path={ROUTES.CART} element={<CartPage />} />
         <Route path={ROUTES.CHECKOUT} element={<CheckoutPage />} />
+        <Route path={ROUTES.SUCCESS} element={<SuccessPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Layout>

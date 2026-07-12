@@ -1,44 +1,34 @@
-import type { ChangeEvent } from "react";
+import type { InputHTMLAttributes } from "react";
 import type { LucideIcon } from "lucide-react";
 
-interface InputProps {
-  value: string;
-  onChange: (value: string) => void;
-  placeholder?: string;
-  type?: "text" | "email" | "password" | "search" | "tel";
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   icon?: LucideIcon;
+  error?: string;
   className?: string;
   inputClassName?: string;
   iconClassName?: string;
 }
 
 const Input = ({
-  value,
-  onChange,
-  placeholder = "",
-  type = "text",
   icon: Icon,
+  error,
   className = "",
   inputClassName = "",
   iconClassName = "",
-}: InputProps) => {
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    onChange(event.target.value);
-  };
+  ...props
+}: InputProps) => (
+  <div className={`input ${className}`}>
+    {Icon && <Icon size={20} className={`input__icon ${iconClassName}`} />}
 
-  return (
-    <div className={`input ${className}`}>
-      {Icon && <Icon size={20} className={`input__icon ${iconClassName}`} />}
+    <input
+      {...props}
+      className={`input__field ${
+        error ? "input__field--error" : ""
+      } ${inputClassName}`}
+    />
 
-      <input
-        className={`input__field ${inputClassName}`}
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        onChange={handleChange}
-      />
-    </div>
-  );
-};
+    {error && <span className="input__error">{error}</span>}
+  </div>
+);
 
 export default Input;

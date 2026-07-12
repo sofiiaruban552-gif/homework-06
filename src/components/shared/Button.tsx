@@ -11,9 +11,14 @@ const Button = ({
   icon: Icon,
   children,
   className = "",
+  disabled = false,
 }: ButtonProps) => {
   return (
-    <button className={`btn ${className}`} onClick={onClick}>
+    <button
+      className={`btn ${className}`}
+      disabled={disabled}
+      onClick={onClick}
+    >
       {Icon && <Icon size={18} />}
       {children}
     </button>
