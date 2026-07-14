@@ -7,13 +7,14 @@ import useCartStore from "@/store/useCartStore";
 
 import Button from "@/components/shared/Button";
 import CartItem from "./CartItem";
+import CartTotal from "@/components/shared/CartTotal";
+import Card from "@/components/shared/Card";
 
 const CartPage = (): ReactElement => {
   const navigate = useNavigate();
-  const { items, totalPrice, clearCart } = useCartStore(
+  const { items, clearCart } = useCartStore(
     useShallow((state) => ({
       items: state.items,
-      totalPrice: state.getTotalPrice(),
       clearCart: state.clearCart,
     })),
   );
@@ -26,11 +27,11 @@ const CartPage = (): ReactElement => {
   };
 
   return (
-    <section className="cart">
-      <h2 className="cart__title">Shopping Cart</h2>
+    <Card className="cart">
+      <h2 className="title">Shopping Cart</h2>
 
       {isEmpty ? (
-        <p className="cart__empty">Your cart is empty.</p>
+        <p className="text">Your cart is empty.</p>
       ) : (
         <>
           <div className="cart__items">
@@ -39,21 +40,20 @@ const CartPage = (): ReactElement => {
             ))}
           </div>
 
-          <div className="cart__footer">
-            <span className="cart__total">Total: ${totalPrice.toFixed(2)}</span>
-
+          <div className="flex-between cart__footer">
+            <CartTotal />
             <div className="cart__actions">
-              <Button className="cart__clear-btn" onClick={handleClearCart}>
+              <Button className="btn" onClick={handleClearCart}>
                 Clear Cart
               </Button>
               <Link to={ROUTES.CHECKOUT}>
-                <Button className="cart__checkout-btn">Checkout</Button>
+                <Button className="btn btn--success">Checkout</Button>
               </Link>
             </div>
           </div>
         </>
       )}
-    </section>
+    </Card>
   );
 };
 

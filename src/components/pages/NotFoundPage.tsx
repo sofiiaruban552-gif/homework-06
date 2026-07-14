@@ -3,22 +3,23 @@ import { AlertCircle } from "lucide-react";
 
 import Button from "@/components/shared/Button";
 import { ROUTES } from "@/types/routes";
+import Card from "../shared/Card";
 
 const NotFoundPage = () => {
   return (
-    <section className="not-found">
+    <Card className="flex-column not-found">
       <AlertCircle size={72} className="not-found__icon" />
 
-      <h1 className="not-found__title">404</h1>
+      <h1 className="title">404</h1>
 
-      <p className="not-found__text">
+      <p className="text">
         Sorry, the page you're looking for doesn't exist or has been moved.
       </p>
 
       <Link to={ROUTES.HOME}>
-        <Button className="not-found__button">Back to Home</Button>
+        <Button>Back to Home</Button>
       </Link>
-    </section>
+    </Card>
   );
 };
 

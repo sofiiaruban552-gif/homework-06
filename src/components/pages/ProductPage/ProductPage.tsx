@@ -1,11 +1,13 @@
-import { ShoppingCart, Star } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import { useParams } from "react-router-dom";
-import { useShallow } from "zustand/shallow";
 
 import useFetch from "@/hooks/useFetch";
 import useCartStore from "@/store/useCartStore";
 
+import Card from "@/components/shared/Card";
 import Button from "@/components/shared/Button";
+import Rating from "@/components/shared/Rating";
+import ProductState from "@/components/shared/ProductState";
 
 import type { Product } from "@/types/product";
 
@@ -18,24 +20,20 @@ const ProductPage = () => {
     data: product,
     isLoading,
     error,
+    refetch,
   } = useFetch<Product>(id ? `${API_URL}${id}` : "");
 
-  const { addToCart } = useCartStore(
-    useShallow((state) => ({
-      addToCart: state.addToCart,
-    })),
-  );
+  const addToCart = useCartStore((state) => state.addToCart);
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    return <p>{error}</p>;
-  }
-
-  if (!product) {
-    return null;
+  if (isLoading || error || !product) {
+    return (
+      <ProductState
+        isLoading={isLoading}
+        error={error}
+        isEmpty={!product && !isLoading && !error}
+        onRetry={refetch}
+      />
+    );
   }
 
   const { title, price, rating, thumbnail, description } = product;
@@ -45,30 +43,27 @@ const ProductPage = () => {
   };
 
   return (
-      <article className="product-page">
-        <div className="product-page__image-wrapper">
-          <img className="product-page__image" src={thumbnail} alt={title} />
+    <Card className="product-page">
+      <div className="flex-center product-page__image-wrapper">
+        <img className="product-page__image" src={thumbnail} alt={title} />
+      </div>
+
+      <div className="flex-column product-page__content">
+        <h1 className="title">{title}</h1>
+
+        <Rating rating={rating} />
+
+        <p className="text">{description}</p>
+
+        <div className="flex-between product-page__footer">
+          <span className="product-page__price">${price}</span>
+
+          <Button icon={ShoppingCart} onClick={handleAddToCart}>
+            Add to cart
+          </Button>
         </div>
-
-        <div className="product-page__content">
-          <h1 className="product-page__title">{title}</h1>
-
-          <div className="product-page__rating">
-            <Star size={18} className="product-page__star" />
-            <span>{rating}</span>
-          </div>
-
-          <p className="product-page__description">{description}</p>
-
-          <div className="product-page__footer">
-            <span className="product-page__price">${price}</span>
-
-            <Button icon={ShoppingCart} onClick={handleAddToCart}>
-              Add to cart
-            </Button>
-          </div>
-        </div>
-      </article>
+      </div>
+    </Card>
   );
 };
 

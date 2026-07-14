@@ -1,0 +1,84 @@
+.input {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  width: 100%;
+}
+
+.input__icon {
+  position: absolute;
+  top: 15px;
+  left: var(--space-4);
+
+  color: var(--text-muted);
+
+  pointer-events: none;
+}
+
+.input__field {
+  width: 100%;
+  height: 48px;
+
+  padding-left: 48px;
+  padding-right: var(--space-4);
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+
+  background: var(--white);
+
+  color: var(--text);
+
+  font: inherit;
+
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.input__field::placeholder {
+  color: var(--text-muted);
+}
+
+.input__field:focus {
+  outline: none;
+
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px var(--primary-light);
+}
+.input__error {
+  color: var(--error);
+  font-size: 0.8rem;
+  padding-top: 5px;
+}
+
+.select {
+  width: 100%;
+  height: 48px;
+
+  padding: 0 var(--space-4) 0 var(--space-9);
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+
+  background: var(--white);
+
+  color: var(--text);
+
+  appearance: none;
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.select:focus {
+  outline: none;
+
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px var(--primary-light);
+}

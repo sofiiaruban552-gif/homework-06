@@ -27,13 +27,13 @@ const CartItem = ({ item }: CartItemProps) => {
   const handleRemove = () => removeFromCart(id);
 
   return (
-    <article className="cart-item">
-      <h3 className="cart-item__title">{title}</h3>
+    <article className="flex-between cart-item">
+      <h2 className="subtitle">{title}</h2>
 
       <div className="cart-item__actions">
         <Button
           icon={Minus}
-          className="cart-item__btn"
+          className="btn btn--icon"
           onClick={handleDecrease}
         />
 
@@ -41,13 +41,13 @@ const CartItem = ({ item }: CartItemProps) => {
 
         <Button
           icon={Plus}
-          className="cart-item__btn"
+          className="btn btn--icon"
           onClick={handleIncrease}
         />
 
         <Button
           icon={Trash2}
-          className="cart-item__remove"
+          className="btn btn--icon"
           onClick={handleRemove}
         />
       </div>

@@ -1,10 +1,11 @@
-import { Star, ShoppingCart } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useShallow } from "zustand/shallow";
 
 import useCartStore from "@/store/useCartStore";
 
 import Button from "@/components/shared/Button";
+import Rating from "@/components/shared/Rating";
 
 import type { Product } from "@/types/product";
 import { ROUTES } from "@/types/routes";
@@ -15,7 +16,6 @@ interface ProductCardProps {
 
 const ProductCard = ({ product }: ProductCardProps) => {
   const { title, price, rating, thumbnail, id } = product;
-
 
   const { items, addToCart } = useCartStore(
     useShallow((state) => ({
@@ -36,7 +36,6 @@ const ProductCard = ({ product }: ProductCardProps) => {
     addToCart(product);
   };
 
-
   return (
     <Link to={ROUTES.product(id)} className="product-card">
       <article>
@@ -44,21 +43,22 @@ const ProductCard = ({ product }: ProductCardProps) => {
           <img className="product-card__image" src={thumbnail} alt={title} />
         </div>
 
-        <div className="product-card__content">
-          <h3 className="product-card__title">{title}</h3>
+        <div className="flex-column product-card__content">
+          <div className="product-card__title-wrapper">
+            <h2 className="subtitle product-card__title">{title}</h2>
 
-          <div className="product-card__rating">
-            <Star size={16} className="product-card__star" />
-            <span>{rating}</span>
+            <span className="product-card__tooltip">{title}</span>
           </div>
 
-          <div className="product-card__footer">
+          <Rating rating={rating} />
+
+          <div className="flex-between product-card__footer">
             <span className="product-card__price">$ {price}</span>
 
             <Button
               icon={ShoppingCart}
               onClick={handleAddToCart}
-              className={isInCart ? "product-card__btn--active" : ""}
+              className="btn"
             >
               {buttonText}
             </Button>

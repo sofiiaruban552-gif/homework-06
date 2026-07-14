@@ -1,0 +1,7 @@
+
+.checkout {
+  max-width: 800px;
+}
+.checkout, .checkout__form, .checkout__footer {
+  gap: var(--space-4);
+}

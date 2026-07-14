@@ -2,7 +2,7 @@ import "@/App.css";
 
 import Filters from "./Filters";
 import ProductList from "./ProductList";
-import ProductState from "./ProductState";
+import ProductState from "@/components/shared/ProductState";
 
 import useFetch from "@/hooks/useFetch";
 import useFilters from "@/hooks/useFilters";

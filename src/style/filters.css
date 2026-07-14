@@ -1,0 +1,36 @@
+.filters {
+  display: flex;
+  gap: var(--space-5);
+}
+
+.filters__search-wrapper {
+  flex: 1;
+}
+
+.filters__select-wrapper {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  width: 240px;
+}
+
+.filters__icon {
+  position: absolute;
+  left: var(--space-4);
+
+  color: var(--text-muted);
+
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .filters {
+    flex-direction: column;
+  }
+
+  .filters__select-wrapper {
+    width: 100%;
+  }
+}

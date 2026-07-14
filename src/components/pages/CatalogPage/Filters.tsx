@@ -1,6 +1,7 @@
 import { Search, Tags } from "lucide-react";
 import type { ChangeEvent } from "react";
 
+import Card from "@/components/shared/Card";
 import Input from "@/components/shared/Input";
 
 interface FiltersProps {
@@ -27,7 +28,7 @@ const Filters = ({
   };
 
   return (
-    <section className="filters">
+    <Card className="filters">
       <Input
         icon={Search}
         value={search}
@@ -40,7 +41,7 @@ const Filters = ({
         <Tags size={20} className="filters__icon" />
 
         <select
-          className="filters__select"
+          className="select"
           value={selectedCategory}
           onChange={handleCategoryChange}
         >
@@ -53,7 +54,7 @@ const Filters = ({
           ))}
         </select>
       </div>
-    </section>
+    </Card>
   );
 };
 

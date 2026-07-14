@@ -1,4 +1,3 @@
-import { useShallow } from "zustand/shallow";
 import { User, Mail, Phone, MapPin } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,18 +7,15 @@ import useCartStore from "@/store/useCartStore";
 
 import Input from "@/components/shared/Input";
 import Button from "@/components/shared/Button";
+import Card from "@/components/shared/Card";
 
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "@/types/routes";
+import CartTotal from "@/components/shared/CartTotal";
 
 const CheckoutPage = () => {
   const navigate = useNavigate();
-  const { totalPrice, clearCart } = useCartStore(
-    useShallow((state) => ({
-      totalPrice: state.getTotalPrice(),
-      clearCart: state.clearCart,
-    })),
-  );
+  const clearCart = useCartStore((state) => state.clearCart);
 
   const {
     register,
@@ -43,10 +39,13 @@ const CheckoutPage = () => {
   };
 
   return (
-    <section className="checkout">
-      <h1 className="checkout__title">Checkout</h1>
+    <Card className="flex-column checkout">
+      <h1 className="title">Checkout</h1>
 
-      <form className="checkout__form" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className="flex-column checkout__form"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <Input
           icon={User}
           placeholder="Name"
@@ -77,14 +76,10 @@ const CheckoutPage = () => {
           {...register("address")}
         />
 
-        <div className="checkout__footer">
-          <div className="checkout__total">
-            <span>Total:</span>
-            <span>${totalPrice.toFixed(2)}</span>
-          </div>
-
+        <div className="flex-between checkout__footer">
+          <CartTotal />
           <Button
-            className="checkout__submit"
+            className="btn btn--success"
             type="submit"
             disabled={!isValid}
           >
@@ -92,7 +87,7 @@ const CheckoutPage = () => {
           </Button>
         </div>
       </form>
-    </section>
+    </Card>
   );
 };
 

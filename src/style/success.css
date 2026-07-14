@@ -1,0 +1,11 @@
+.success, .not-found {
+  align-items: center;
+  gap: var(--space-5);
+
+  max-width: 600px;
+
+}
+
+.success__icon {
+  color: var(--success);
+}
