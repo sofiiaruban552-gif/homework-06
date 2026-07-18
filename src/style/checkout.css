@@ -5,3 +5,12 @@
 .checkout, .checkout__form, .checkout__footer {
   gap: var(--space-4);
 }
+
+.checkout__empty {
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-5);
+
+  min-height: 300px;
+  text-align: center;
+}

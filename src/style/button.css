@@ -55,4 +55,14 @@
   height: 36px;
   padding: 0;
   border-radius: var(--radius-sm);
+
+  transition: transform 150ms ease;
+}
+
+.btn--icon:hover:not(:disabled) {
+  transform: scale(1.05);
+}
+
+.btn--icon:active:not(:disabled) {
+  transform: scale(0.95);
 }

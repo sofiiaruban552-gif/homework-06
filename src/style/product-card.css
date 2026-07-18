@@ -1,63 +1,81 @@
+@import "./base.css";
+
 .product-card {
+  display: flex;
+  flex-direction: column;
+
   background: var(--white);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
+
   box-shadow: var(--shadow-sm);
   overflow: visible;
-  transition: 0.2s ease;
   cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  animation: fade-in-up 0.35s ease forwards;
+  opacity: 0;
 }
 
 .product-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
   box-shadow: var(--shadow-md);
 }
 
 .product-card__image-wrapper {
   height: 180px;
-  background: var(--bg);
   overflow: hidden;
+
+  background: var(--bg);
   border-radius: var(--radius-md) var(--radius-md) 0 0;
 }
 
 .product-card__image {
+  display: block;
+
   width: 100%;
   height: 100%;
+
   object-fit: cover;
+
+  transition: transform 0.25s ease;
+}
+
+.product-card:hover .product-card__image {
+  transform: scale(1.05);
 }
 
 .product-card__content {
-  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
   gap: var(--space-2);
+
+  padding: var(--space-4);
 }
 
 .product-card__footer {
-  margin-top: var(--space-2);
+  margin-top: auto;
 }
 
-.product-card__price, .product-page__price {
-  font-size: 1.125rem;
-  font-weight: 700;
-  color: var(--primary);
-}
-.product-card__title {
-  max-width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 .product-card__title-wrapper {
   position: relative;
-  display: inline-block;
-  position: relative;
-  display: block;
+}
+
+.product-card__title {
+  overflow: hidden;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .product-card__tooltip {
   position: absolute;
 
-  bottom: calc(100% + var(--space-2));
   right: 0;
+  bottom: calc(100% + var(--space-2));
 
   max-width: 280px;
   width: max-content;
@@ -77,10 +95,11 @@
   pointer-events: none;
 
   transform: translateY(4px);
+
   transition:
-    opacity .2s ease,
-    transform .2s ease,
-    visibility .2s ease;
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    visibility 0.2s ease;
 
   z-index: 100;
 }
@@ -90,3 +109,4 @@
   visibility: visible;
   transform: translateY(0);
 }
+

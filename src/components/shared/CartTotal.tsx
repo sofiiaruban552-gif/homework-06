@@ -1,11 +1,15 @@
-import type { ReactElement } from "react";
+import { type ReactElement } from "react";
 
 import useCartStore from "@/store/useCartStore";
 
 const CartTotal = (): ReactElement => {
   const totalPrice = useCartStore((state) => state.getTotalPrice());
 
-  return <span className="cart__total">Total: ${totalPrice.toFixed(2)}</span>;
+  return (
+    <span key={totalPrice} className="cart__total cart__total--updating">
+      Total: ${totalPrice.toFixed(2)}
+    </span>
+  );
 };
 
 export default CartTotal;

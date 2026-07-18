@@ -1,23 +1,15 @@
 import { Store, ShoppingCart } from "lucide-react";
-import { useNavigate, Link } from "react-router-dom";
-import Button from "../shared/Button";
+import { Link, NavLink } from "react-router-dom";
+import clsx from "clsx";
+
+import useCartStore from "@/store/useCartStore";
 import { ROUTES } from "@/types/routes";
 
-import useCartStore from "../../store/useCartStore";
-
 const Header = () => {
-  const navigate = useNavigate();
-
-  const handleCartClick = () => {
-    navigate(ROUTES.CART);
-  };
-
   const totalItems = useCartStore((state) =>
     state.items.reduce((sum, item) => sum + item.qty, 0),
   );
-
   const hasItemsInCart = totalItems > 0;
-
   return (
     <header className="header">
       <Link to={ROUTES.HOME} className="header__logo">
@@ -25,17 +17,37 @@ const Header = () => {
         <span>My Store</span>
       </Link>
 
-      <div className="header__cart-wrapper">
-        <Button
-          icon={ShoppingCart}
-          className="header__cart"
-          onClick={handleCartClick}
-        />
+      <nav className="header__nav">
+        <NavLink
+          to={ROUTES.HOME}
+          className={({ isActive }) =>
+            clsx("header__link", isActive && "header__link--active")
+          }
+        >
+          Catalog
+        </NavLink>
 
-        {hasItemsInCart && (
-          <span className="header__cart-badge">{totalItems}</span>
-        )}
-      </div>
+        <NavLink
+          to={ROUTES.CART}
+          className={({ isActive }) =>
+            clsx("header__link", isActive && "header__link--active")
+          }
+        >
+          <div className="header__cart-wrapper">
+            <span>Cart</span>
+
+            <span className="header__cart-icon">
+              <ShoppingCart className="header__cart" />
+
+              {hasItemsInCart && (
+                <span key={totalItems} className="header__cart-badge">
+                  {totalItems}
+                </span>
+              )}
+            </span>
+          </div>
+        </NavLink>
+      </nav>
     </header>
   );
 };

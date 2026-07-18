@@ -12,12 +12,14 @@ const Button = ({
   children,
   className = "",
   disabled = false,
+  ...props
 }: ButtonProps) => {
   return (
     <button
       className={`btn ${className}`}
       disabled={disabled}
       onClick={onClick}
+      {...props}
     >
       {Icon && <Icon size={18} />}
       {children}

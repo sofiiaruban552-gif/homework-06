@@ -1,8 +1,16 @@
 .header {
-  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  gap: var(--space-2)
+
+  width: 100%;
+  padding: var(--space-4) 0;
+
+  background: var(--bg);
 }
 
 .header__logo {
@@ -12,19 +20,51 @@
 
   color: var(--primary);
 
-  font-family: 'Poppins', sans-serif;
+  text-decoration: none;
+  font-family: "Poppins", sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
-  line-height: 1;
-  text-decoration: none;
 }
 
-.header__cart {
-  position: relative;
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.header__link {
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 1.125rem;
+  font-weight: 600;
+
+  transition: color 0.2s;
+}
+
+.header__link:hover {
+  color: var(--primary);
+}
+
+.header__link--active {
+  color: var(--primary);
 }
 
 .header__cart-wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.header__cart-icon {
   position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.header__cart {
+  width: 24px;
+  height: 24px;
 }
 
 .header__cart-badge {
@@ -36,19 +76,33 @@
   align-items: center;
   justify-content: center;
 
-  min-width: 20px;
-  height: 20px;
-  padding: 0 var(--space-1);
-
-  background-color: var(--error);
-  color: var(--white);
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
 
   border-radius: 999px;
+  background: var(--error);
+  color: var(--white);
 
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   line-height: 1;
+
+  animation: badge-pop 0.2s ease;
 }
+
+@keyframes badge-pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .footer {
   display: flex;
   justify-content: center;

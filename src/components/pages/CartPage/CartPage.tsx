@@ -1,3 +1,4 @@
+import { ArrowLeft } from "lucide-react";
 import { useShallow } from "zustand/shallow";
 import type { ReactElement } from "react";
 import { useNavigate, Link } from "react-router-dom";
@@ -12,6 +13,7 @@ import Card from "@/components/shared/Card";
 
 const CartPage = (): ReactElement => {
   const navigate = useNavigate();
+
   const { items, clearCart } = useCartStore(
     useShallow((state) => ({
       items: state.items,
@@ -26,8 +28,16 @@ const CartPage = (): ReactElement => {
     navigate(ROUTES.HOME);
   };
 
+  const handleGoHome = () => {
+    navigate(ROUTES.HOME);
+  };
+
   return (
     <Card className="cart">
+      <Button icon={ArrowLeft} onClick={handleGoHome} className="cart__btn">
+        Back To Home
+      </Button>
+
       <h2 className="title">Shopping Cart</h2>
 
       {isEmpty ? (
@@ -41,13 +51,13 @@ const CartPage = (): ReactElement => {
           </div>
 
           <div className="flex-between cart__footer">
-            <CartTotal />
+              <CartTotal />
             <div className="cart__actions">
-              <Button className="btn" onClick={handleClearCart}>
+              <Button onClick={handleClearCart}>
                 Clear Cart
               </Button>
               <Link to={ROUTES.CHECKOUT}>
-                <Button className="btn btn--success">Checkout</Button>
+                <Button className="btn--success">Checkout</Button>
               </Link>
             </div>
           </div>

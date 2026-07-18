@@ -9,6 +9,7 @@ import Rating from "@/components/shared/Rating";
 
 import type { Product } from "@/types/product";
 import { ROUTES } from "@/types/routes";
+import Price from "@/components/shared/Price";
 
 interface ProductCardProps {
   product: Product;
@@ -53,7 +54,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           <Rating rating={rating} />
 
           <div className="flex-between product-card__footer">
-            <span className="product-card__price">$ {price}</span>
+            <Price value={price} />
 
             <Button
               icon={ShoppingCart}

@@ -1,4 +1,5 @@
 import Button from "@/components/shared/Button";
+import { LoaderCircle } from "lucide-react";
 
 interface ProductStateProps {
   isLoading: boolean;
@@ -14,33 +15,20 @@ const ProductState = ({
   onRetry,
 }: ProductStateProps) => {
   if (isLoading) {
-    return (
-      <div className="product-state">
-        <div className="product-state__spinner" />
-        <p>
-          Loading
-          <span className="loading-dots" />
-        </p>
-      </div>
-    );
+    return <LoaderCircle className="product-state__spinner" />;
   }
 
   if (error) {
     return (
-      <div className="product-state">
-        <p>{error}</p>
-
+      <>
+        <p className="text">{error}</p>
         <Button onClick={onRetry}>Try again</Button>
-      </div>
+      </>
     );
   }
 
   if (isEmpty) {
-    return (
-      <div className="product-state">
-        <p>No products found.</p>
-      </div>
-    );
+    return <p className="text">No products found.</p>;
   }
 
   return null;
