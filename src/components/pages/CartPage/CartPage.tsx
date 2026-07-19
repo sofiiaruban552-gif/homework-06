@@ -1,7 +1,7 @@
 import { ArrowLeft } from "lucide-react";
 import { useShallow } from "zustand/shallow";
 import type { ReactElement } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ROUTES } from "@/types/routes";
 
 import useCartStore from "@/store/useCartStore";
@@ -23,9 +23,18 @@ const CartPage = (): ReactElement => {
 
   const isEmpty = items.length === 0;
 
+  const PULSE_DURATION = 300;
+
   const handleClearCart = () => {
-    clearCart();
-    navigate(ROUTES.HOME);
+    setTimeout(() => {
+      clearCart();
+    }, PULSE_DURATION);
+  };
+
+  const handleCheckout = () => {
+    setTimeout(() => {
+      navigate(ROUTES.CHECKOUT);
+    }, PULSE_DURATION);
   };
 
   const handleGoHome = () => {
@@ -51,14 +60,14 @@ const CartPage = (): ReactElement => {
           </div>
 
           <div className="flex-between cart__footer">
-              <CartTotal />
+            <CartTotal />
             <div className="cart__actions">
-              <Button onClick={handleClearCart}>
+              <Button pulse onClick={handleClearCart}>
                 Clear Cart
               </Button>
-              <Link to={ROUTES.CHECKOUT}>
-                <Button className="btn--success">Checkout</Button>
-              </Link>
+              <Button pulse className="btn--success" onClick={handleCheckout}>
+                Checkout
+              </Button>
             </div>
           </div>
         </>

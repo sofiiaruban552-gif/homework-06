@@ -64,25 +64,6 @@
   align-self: flex-start;
 }
 
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.08);
-  }
-
-  100% {
-    transform: scale(1);
-  }
-}
-
-.product-page__button {
-  display: inline-flex;
-  animation: pulse 200ms ease-in-out;
-}
-
 @media (max-width: 768px) {
   .product-page {
     grid-template-columns: 1fr;

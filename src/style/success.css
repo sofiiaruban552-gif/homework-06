@@ -1,11 +1,28 @@
-.success, .not-found {
+.success {
   align-items: center;
   gap: var(--space-5);
 
   max-width: 600px;
-
 }
 
 .success__icon {
   color: var(--success);
+   animation: success-pop 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes success-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  70% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }

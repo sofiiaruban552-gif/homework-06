@@ -66,3 +66,21 @@
 .btn--icon:active:not(:disabled) {
   transform: scale(0.95);
 }
+
+.btn--pulse {
+  animation: pulse 300ms ease;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.08);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}

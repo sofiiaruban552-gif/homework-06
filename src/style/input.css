@@ -43,12 +43,21 @@
   color: var(--text-muted);
 }
 
-.input__field:focus {
+.input__field:focus:not(.input__field--error) {
   outline: none;
 
   border-color: var(--primary);
   box-shadow: 0 0 0 4px var(--primary-light);
 }
+
+.input__field.input__field--error,
+.input__field.input__field--error:focus {
+  outline: none;
+  
+  border-color: var(--error);
+  box-shadow: 0 0 0 4px var(--error-light);
+} 
+
 .input__error {
   color: var(--error);
   font-size: 0.8rem;

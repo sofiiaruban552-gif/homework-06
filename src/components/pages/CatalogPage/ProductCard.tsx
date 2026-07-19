@@ -60,6 +60,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
               icon={ShoppingCart}
               onClick={handleAddToCart}
               className="btn"
+              pulse
             >
               {buttonText}
             </Button>

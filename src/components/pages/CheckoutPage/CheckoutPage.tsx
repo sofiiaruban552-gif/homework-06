@@ -25,7 +25,7 @@ const CheckoutPage = () => {
   );
   const isEmpty = items.length === 0;
 
-  const totalItems = items.reduce((total, item) => total + item.qty, 0);
+  const totalItems = useCartStore((state) => state.getTotalItems());
 
   const {
     register,
@@ -41,11 +41,18 @@ const CheckoutPage = () => {
       address: "",
     },
   });
-
+  const handleContinueShopping = () => {
+    setTimeout(() => {
+      navigate(ROUTES.HOME);
+    }, 300);
+  };
   const onSubmit = (data: CheckoutForm) => {
     console.log("Checkout data:", data);
-    clearCart();
-    navigate(ROUTES.SUCCESS);
+
+    setTimeout(() => {
+      clearCart();
+      navigate(ROUTES.SUCCESS);
+    }, 300);
   };
 
   return (
@@ -57,7 +64,7 @@ const CheckoutPage = () => {
             Your cart is empty. There is nothing to check out.
           </p>
 
-          <Button onClick={() => navigate(ROUTES.HOME)}>
+          <Button pulse onClick={handleContinueShopping}>
             Continue Shopping
           </Button>
         </div>
@@ -109,6 +116,7 @@ const CheckoutPage = () => {
                 className="btn--success"
                 type="submit"
                 disabled={!isValid}
+                pulse
               >
                 Checkout
               </Button>

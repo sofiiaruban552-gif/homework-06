@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { ArrowLeft, ShoppingCart, Tag } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
-import clsx from "clsx";
 
 import useFetch from "@/hooks/useFetch";
 import useCartStore from "@/store/useCartStore";
@@ -19,11 +18,6 @@ const API_URL = "https://dummyjson.com/products/";
 const ProductPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [isPulsing, setIsPulsing] = useState(false);
-
-  const handleGoBack = () => {
-    navigate(-1);
-  };
 
   const {
     data: product,
@@ -52,9 +46,16 @@ const ProductPage = () => {
   const { title, price, rating, thumbnail, description, category, stock } =
     product;
 
+  const isInStock = stock > 0;
+  const stockLabel = isInStock ? "In Stock" : "Out of Stock";
+  const stockClassName = isInStock ? "in-stock" : "out-of-stock";
+
+  const handleGoBack = () => navigate(-1);
+
   const handleAddToCart = () => {
+    if (!isInStock) return;
+
     addToCart(product);
-    setIsPulsing(true);
   };
 
   return (
@@ -68,6 +69,7 @@ const ProductPage = () => {
           icon={ArrowLeft}
           className="product-page__back"
           onClick={handleGoBack}
+          pulse
         >
           Back
         </Button>
@@ -79,9 +81,9 @@ const ProductPage = () => {
           <Tag size={16} />
           {category}
         </span>
-        <span className={stock ? "in-stock" : "out-of-stock"}>
-          {stock ? "In Stock" : "Out of Stock"}
-        </span>
+
+        <span className={stockClassName}>{stockLabel}</span>
+
         <p className="text">{description}</p>
 
         <div className="flex-between product-page__footer">
@@ -90,10 +92,8 @@ const ProductPage = () => {
           <Button
             icon={ShoppingCart}
             onClick={handleAddToCart}
-            className={clsx({
-              "product-page__button": isPulsing,
-            })}
-            onAnimationEnd={() => setIsPulsing(false)}
+            disabled={!isInStock}
+            pulse
           >
             Add to cart
           </Button>

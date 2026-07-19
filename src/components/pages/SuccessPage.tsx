@@ -1,11 +1,18 @@
 import { CheckCircle } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import useCartStore from "@/store/useCartStore";
 
 import Button from "@/components/shared/Button";
 import Card from "../shared/Card";
 import { ROUTES } from "@/types/routes";
 
 const SuccessPage = () => {
+  const totalItems = useCartStore((state) => state.getTotalItems());
+
+  if (totalItems === 0) {
+    return <Navigate to={ROUTES.HOME} replace />;
+  }
+
   return (
     <Card className="flex-column success">
       <CheckCircle size={72} className="success__icon" />

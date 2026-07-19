@@ -6,10 +6,9 @@ import useCartStore from "@/store/useCartStore";
 import { ROUTES } from "@/types/routes";
 
 const Header = () => {
-  const totalItems = useCartStore((state) =>
-    state.items.reduce((sum, item) => sum + item.qty, 0),
-  );
+  const totalItems = useCartStore((state) => state.getTotalItems());
   const hasItemsInCart = totalItems > 0;
+
   return (
     <header className="header">
       <Link to={ROUTES.HOME} className="header__logo">

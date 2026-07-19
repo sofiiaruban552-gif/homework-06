@@ -17,7 +17,7 @@ const NotFoundPage = () => {
       </p>
 
       <Link to={ROUTES.HOME}>
-        <Button>Back to Home</Button>
+        <Button pulse>Back to Home</Button>
       </Link>
     </Card>
   );

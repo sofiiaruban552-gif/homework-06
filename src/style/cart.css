@@ -103,22 +103,19 @@
 }
 
 .cart__total--updating {
-  animation: total-update 250ms ease;
+  animation: total-update .35s ease;
 }
 
 @keyframes total-update {
   0% {
     transform: scale(1);
-    opacity: 0.8;
   }
 
   50% {
-    transform: scale(1.08);
-    opacity: 1;
+    transform: scale(1.05);
   }
 
   100% {
     transform: scale(1);
-    opacity: 1;
   }
 }
