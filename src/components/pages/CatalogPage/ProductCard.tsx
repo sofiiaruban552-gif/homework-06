@@ -59,7 +59,6 @@ const ProductCard = ({ product }: ProductCardProps) => {
             <Button
               icon={ShoppingCart}
               onClick={handleAddToCart}
-              className="btn"
               pulse
             >
               {buttonText}

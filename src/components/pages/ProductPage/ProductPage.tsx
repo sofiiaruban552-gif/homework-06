@@ -69,7 +69,6 @@ const ProductPage = () => {
           icon={ArrowLeft}
           className="product-page__back"
           onClick={handleGoBack}
-          pulse
         >
           Back
         </Button>

@@ -8,6 +8,7 @@ import useCartStore from "@/store/useCartStore";
 
 import Input from "@/components/shared/Input";
 import Button from "@/components/shared/Button";
+import ButtonLink from "@/components/shared/ButtonLink";
 import Card from "@/components/shared/Card";
 
 import { useNavigate } from "react-router-dom";
@@ -41,11 +42,7 @@ const CheckoutPage = () => {
       address: "",
     },
   });
-  const handleContinueShopping = () => {
-    setTimeout(() => {
-      navigate(ROUTES.HOME);
-    }, 300);
-  };
+
   const onSubmit = (data: CheckoutForm) => {
     console.log("Checkout data:", data);
 
@@ -57,20 +54,17 @@ const CheckoutPage = () => {
 
   return (
     <Card className="flex-column checkout">
+      <h1 className="title">Checkout</h1>
       {isEmpty ? (
         <div className="flex-column checkout__empty">
-          <h1 className="title">Checkout</h1>
           <p className="text">
             Your cart is empty. There is nothing to check out.
           </p>
 
-          <Button pulse onClick={handleContinueShopping}>
-            Continue Shopping
-          </Button>
+          <ButtonLink path={ROUTES.HOME} text="Continue Shopping" />
         </div>
       ) : (
         <>
-          <h1 className="title">Checkout</h1>
           <form
             className="flex-column checkout__form"
             onSubmit={handleSubmit(onSubmit)}

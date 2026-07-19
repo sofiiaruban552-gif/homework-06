@@ -1,7 +1,6 @@
-import { Link } from "react-router-dom";
 import { AlertCircle } from "lucide-react";
 
-import Button from "@/components/shared/Button";
+import ButtonLink from "@/components/shared/ButtonLink";
 import { ROUTES } from "@/types/routes";
 import Card from "../shared/Card";
 
@@ -16,9 +15,7 @@ const NotFoundPage = () => {
         Sorry, the page you're looking for doesn't exist or has been moved.
       </p>
 
-      <Link to={ROUTES.HOME}>
-        <Button pulse>Back to Home</Button>
-      </Link>
+      <ButtonLink path={ROUTES.HOME} text="Back to Home" />
     </Card>
   );
 };

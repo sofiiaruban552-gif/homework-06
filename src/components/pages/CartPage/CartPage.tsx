@@ -7,9 +7,12 @@ import { ROUTES } from "@/types/routes";
 import useCartStore from "@/store/useCartStore";
 
 import Button from "@/components/shared/Button";
+import ButtonLink from "@/components/shared/ButtonLink";
 import CartItem from "./CartItem";
 import CartTotal from "@/components/shared/CartTotal";
 import Card from "@/components/shared/Card";
+
+const PULSE_DURATION = 300;
 
 const CartPage = (): ReactElement => {
   const navigate = useNavigate();
@@ -23,8 +26,6 @@ const CartPage = (): ReactElement => {
 
   const isEmpty = items.length === 0;
 
-  const PULSE_DURATION = 300;
-
   const handleClearCart = () => {
     setTimeout(() => {
       clearCart();
@@ -37,16 +38,15 @@ const CartPage = (): ReactElement => {
     }, PULSE_DURATION);
   };
 
-  const handleGoHome = () => {
-    navigate(ROUTES.HOME);
-  };
-
   return (
     <Card className="cart">
-      <Button icon={ArrowLeft} onClick={handleGoHome} className="cart__btn">
-        Back To Home
-      </Button>
-
+      <ButtonLink
+        path={ROUTES.HOME}
+        text="Back To Home"
+        icon={ArrowLeft}
+        className="cart__btn"
+      />
+      
       <h2 className="title">Shopping Cart</h2>
 
       {isEmpty ? (

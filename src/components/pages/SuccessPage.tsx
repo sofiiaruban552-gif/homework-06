@@ -1,10 +1,10 @@
 import { CheckCircle } from "lucide-react";
-import { Link, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import useCartStore from "@/store/useCartStore";
 
-import Button from "@/components/shared/Button";
 import Card from "../shared/Card";
 import { ROUTES } from "@/types/routes";
+import ButtonLink from "../shared/ButtonLink";
 
 const SuccessPage = () => {
   const totalItems = useCartStore((state) => state.getTotalItems());
@@ -19,9 +19,7 @@ const SuccessPage = () => {
 
       <h1 className="title">Order placed successfully!</h1>
 
-      <Link to={ROUTES.HOME}>
-        <Button>Continue Shopping</Button>
-      </Link>
+      <ButtonLink path={ROUTES.HOME} text="Continue Shopping" />
     </Card>
   );
 };

@@ -55,7 +55,7 @@ const CartItem = ({ item }: CartItemProps) => {
       <div className="cart-item__actions">
         <Button
           icon={Minus}
-          className="btn btn--icon"
+          className="btn--icon"
           onClick={handleDecrease}
           disabled={isRemoving}
         />
@@ -64,14 +64,14 @@ const CartItem = ({ item }: CartItemProps) => {
 
         <Button
           icon={Plus}
-          className="btn btn--icon"
+          className="btn--icon"
           onClick={handleIncrease}
           disabled={isRemoving}
         />
 
         <Button
           icon={Trash2}
-          className="btn btn--icon"
+          className="btn--icon"
           onClick={handleRemove}
           disabled={isRemoving}
         />
