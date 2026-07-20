@@ -1,15 +1,14 @@
 import { CheckCircle } from "lucide-react";
-import { Navigate } from "react-router-dom";
-import useCartStore from "@/store/useCartStore";
+import { Navigate, useLocation } from "react-router-dom";
 
 import Card from "../shared/Card";
 import { ROUTES } from "@/types/routes";
 import ButtonLink from "../shared/ButtonLink";
 
 const SuccessPage = () => {
-  const totalItems = useCartStore((state) => state.getTotalItems());
+  const location = useLocation();
 
-  if (totalItems === 0) {
+  if (!location.state?.fromCheckout) {
     return <Navigate to={ROUTES.HOME} replace />;
   }
 

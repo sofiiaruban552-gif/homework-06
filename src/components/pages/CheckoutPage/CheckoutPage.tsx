@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { User, Mail, Phone, MapPin } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,6 +18,7 @@ import CartTotal from "@/components/shared/CartTotal";
 
 const CheckoutPage = () => {
   const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { clearCart, items } = useCartStore(
     useShallow((state) => ({
@@ -44,11 +46,15 @@ const CheckoutPage = () => {
   });
 
   const onSubmit = (data: CheckoutForm) => {
+    setIsSubmitting(true);
     console.log("Checkout data:", data);
 
     setTimeout(() => {
       clearCart();
-      navigate(ROUTES.SUCCESS);
+
+      navigate(ROUTES.SUCCESS, {
+        state: { fromCheckout: true },
+      });
     }, 300);
   };
 
@@ -109,10 +115,10 @@ const CheckoutPage = () => {
               <Button
                 className="btn--success"
                 type="submit"
-                disabled={!isValid}
+                disabled={!isValid || isSubmitting}
                 pulse
               >
-                Checkout
+                {isSubmitting ? "Placing your order…" : "Checkout"}
               </Button>
             </div>
           </form>
